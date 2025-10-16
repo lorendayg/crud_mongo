@@ -1,21 +1,18 @@
 <?php 
-    require_once $_SERVER['DOCUMENT_ROOT'] . "/crud_mongo/vendor/autoload.php";
+    require_once _DIR_ . '/../vendor/autoload.php';
 
     class Conexion{
         public function conectar(){
             try {
-            $servidor="127.0.0.1";
-            $usuario = "mongadmin";
-            $password = "123456";
-            $baseDatos = "crud";
+            // Credenciales de conexión
+            $servidor = "localhost";
             $puerto = "27017";
+            $usuario = "backend";
+            $password = "backend2025";
+            $BD = "b221190117_crud2";
 
-            $cadenaConexion = "mongodb://" .
-                                $usuario . ":" . 
-                                $password . "@" .
-                                $servidor . ":" .
-                                $puerto . "/" .
-                                $baseDatos;
+            // Cadena de conexión corregida
+            $cadenaConexion = "mongodb://$usuario:$password@$servidor:$puerto/$BD?authSource=admin";
             $cliente = new MongoDB\client($cadenaConexion);
             return $cliente->selectDatabase($baseDatos);
             } catch (\Throwable $th) {
